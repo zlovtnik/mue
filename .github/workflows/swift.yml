@@ -15,8 +15,8 @@ jobs:
     - uses: actions/checkout@v4
     - name: Install Swift 6.0.0
       run: |
-        brew install swift@6
-        brew link --overwrite --force swift@6
+        brew install swift
+        brew link --overwrite --force swift
     - name: Build
       run: swift build -v
     - name: Run tests
