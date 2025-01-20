@@ -1,4 +1,5 @@
 import Vapor
+import Fluent
 
 func routes(_ app: Application) throws {
     app.get { req async throws in
@@ -17,4 +18,13 @@ func routes(_ app: Application) throws {
         return printHomeRole()
     }
 
+    let taxesController = TaxesController()
+    let taxes = app.grouped("taxes")
+    taxes.get(use: taxesController.index)
+    taxes.post(use: taxesController.create)
+    taxes.group(":taxID") { tax in
+        tax.get(use: taxesController.show)
+        tax.put(use: taxesController.update)
+        tax.delete(use: taxesController.delete)
+    }
 }
